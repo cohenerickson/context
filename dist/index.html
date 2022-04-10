@@ -4,21 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Context</title>
-  <script type="module" crossorigin src="/assets/index.987f00fb.js"></script>
+  <script type="module" crossorigin src="./dist/assets/index.4fd8a1ee.js"></script>
 </head>
   <body>
     <h1>Menujs</h1>
     <p>A library built in typescript for making custom context menus</p>
 
     <pre>
-import { Context, Button } from "./menu";
+import { Context, Button } from "./index";
 
-let menu = new Context();
+window.menu = new Context({});
 
 menu.addButton(new Button({
   text: "Alert",
-  run: (event, target) => {
+  run: (event: MouseEvent, target: MouseEvent) => {
     alert();
+  }
+}));
+
+menu.addButton(new Button({
+  text: "Console Log",
+  run: (event: MouseEvent, target: MouseEvent) => {
+    console.log("Button Pressed!");
   }
 }));
     </pre>

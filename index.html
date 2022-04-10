@@ -16,14 +16,14 @@ window.menu = new Context({});
 
 menu.addButton(new Button({
   text: "Alert",
-  run: (event, target) => {
+  run: (event: MouseEvent, target: MouseEvent) => {
     alert();
   }
 }));
 
 menu.addButton(new Button({
   text: "Console Log",
-  run: (event, target) => {
+  run: (event: MouseEvent, target: MouseEvent) => {
     console.log("Button Pressed!");
   }
 }));
