@@ -6,6 +6,21 @@
     <title>Context</title>
   </head>
   <body>
+    <h1>Menujs</h1>
+    <p>A library built in typescript for making custom context menus</p>
+
+    <pre>
+import { Context, Button } from "./menu";
+
+let menu = new Context();
+
+menu.addButton(new Button({
+  text: "Alert",
+  run: (event, target) => {
+    alert();
+  }
+}));
+    </pre>
   </body>
 </html>
 <script type="module" src="./test.ts"></script>
