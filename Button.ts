@@ -31,7 +31,11 @@ class Button {
     if (this.options.cmd) elm.append(u("<td>").addClass("text").text(this.options.cmd));
 
     if (this.options.run) {
-      elm.on("click", (click) => {
+      elm.on("click", (click: MouseEvent) => {
+        this.options.run(click, target);
+        context.close(click);
+      });
+      elm.on("contextmenu", (click: MouseEvent) => {
         this.options.run(click, target);
         context.close(click);
       });

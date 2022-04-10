@@ -27,6 +27,14 @@ class Context {
       target.preventDefault();
       this.close(target);
     });
+    u(this.menu.first().contentDocument).on("click", (target: MouseEvent) => {
+      target.preventDefault();
+      this.close(target);
+    });
+    u(this.menu.first().contentDocument).on("contextmenu", (target: MouseEvent) => {
+      target.preventDefault();
+      this.close(target);
+    });
     u("html").on("contextmenu", (target: MouseEvent) => {
       target.preventDefault();
       this.close(target);

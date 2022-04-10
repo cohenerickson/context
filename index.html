@@ -10,14 +10,21 @@
     <p>A library built in typescript for making custom context menus</p>
 
     <pre>
-import { Context, Button } from "./menu";
+import { Context, Button } from "./index";
 
-let menu = new Context();
+window.menu = new Context({});
 
 menu.addButton(new Button({
   text: "Alert",
   run: (event, target) => {
     alert();
+  }
+}));
+
+menu.addButton(new Button({
+  text: "Console Log",
+  run: (event, target) => {
+    console.log("Button Pressed!");
   }
 }));
     </pre>
