@@ -54,16 +54,29 @@ class Context {
     return this.buttons.find(x=>x.id===id);
   }
 
+  addSeparator () {
+    this.buttons.push("SEP");
+  }
+
+  addSep () {
+    this.addSeparator();
+  }
+
   open (target: MouseEvent) {
     // add buttons
     this.menu.removeClass("__context-menu_hidden__");
     u(this.menu.first().contentDocument.body).append(u("<div>").addClass("menu"));
     let btns = [];
-    this.buttons.forEach((btn: Button) => {
-      let criteria = btn.options.criteria(target);
-      if (criteria) {
-        btns.push(btn);
-        u(this.menu.first().contentDocument.body).find(".menu").append(btn.elm(target, this));
+    this.buttons.forEach((btn: Button|string) => {
+      if (btn === "SEP") {
+        let sep = u("<div>").addClass("separator");
+        u(this.menu.first().contentDocument.body).find(".menu").append(sep);
+      } else {
+        let criteria = btn.options.criteria(target);
+        if (criteria) {
+          btns.push(btn);
+          u(this.menu.first().contentDocument.body).find(".menu").append(btn.elm(target, this));
+        }
       }
     });
     if (!btns.length) return this.close(target);

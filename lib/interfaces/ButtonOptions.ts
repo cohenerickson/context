@@ -1,8 +1,9 @@
 interface ButtonOptions {
-  text: String,
+  text: string,
   run: Function,
-  cmd?: String,
-  criteria?: Function
+  cmd?: string,
+  criteria?: Function,
+  listen?: boolean
 }
 
 export default ButtonOptions;

@@ -88,7 +88,7 @@ function genCSS (id: number, options: StyleOptions) {
       }
 
       ${options.light.hover.background ||
-        options.light.hover.background ?
+        options.dark.hover.background ?
         `
         .menu .button:hover {
           background: var(--bg-hover);
@@ -97,7 +97,7 @@ function genCSS (id: number, options: StyleOptions) {
       }
 
       ${options.light.hover.text ||
-        options.light.hover.text ?
+        options.dark.hover.text ?
         `
         .menu .button:hover .text {
           color: var(--text-hover);
@@ -106,7 +106,7 @@ function genCSS (id: number, options: StyleOptions) {
       }
 
       ${options.light.hover.cmd ||
-        options.light.hover.cmd ?
+        options.dark.hover.cmd ?
         `
         .menu .button:hover .cmd {
           color: var(--cmd-hover);
