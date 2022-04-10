@@ -1,6 +1,6 @@
 import { Context, Button } from "./index";
 
-let menu = new Context();
+window.menu = new Context({});
 
 menu.addButton(new Button({
   text: "Alert",

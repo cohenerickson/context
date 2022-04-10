@@ -1,7 +1,8 @@
 interface ButtonOptions {
   text: String,
   run: Function,
-  cmd?: String
+  cmd?: String,
+  criteria?: Function
 }
 
 export default ButtonOptions;
