@@ -1,5 +1,7 @@
 import u from "./lib/umbrella";
 
+import Context from "./Context";
+
 import ButtonOptions from "./lib/interfaces/ButtonOptions";
 
 const Options = {
@@ -10,6 +12,9 @@ const Options = {
 }
 
 class Button {
+  options;
+  id;
+  
   constructor (options: ButtonOptions) {
     this.options = options ?? Options;
     this.options.text = this.options.text ?? Options.text;
@@ -19,15 +24,16 @@ class Button {
     this.id = Math.ceil(Math.random()*100000);
   }
 
-  elm (target: Event) {
-    let elm = u("<table>").attr("id", this.id);
+  elm (target: MouseEvent, context: Context) {
+    let elm = u("<table>").attr("id", this.id).addClass("button");
 
     elm.append(u("<td>").addClass("text").text(this.options.text));
     if (this.options.cmd) elm.append(u("<td>").addClass("text").text(this.options.cmd));
 
-    if (this.options.click) {
+    if (this.options.run) {
       elm.on("click", (click) => {
-        this.options.click(click, target);
+        this.options.run(click, target);
+        context.close(click);
       });
     }
 

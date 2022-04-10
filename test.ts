@@ -8,3 +8,10 @@ menu.addButton(new Button({
     alert();
   }
 }));
+
+menu.addButton(new Button({
+  text: "Console Log",
+  run: (event, target) => {
+    console.log("Button Pressed!");
+  }
+}));

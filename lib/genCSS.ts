@@ -56,6 +56,10 @@ function genCSS (id: number, options: StyleOptions) {
       body {
         margin: 0;
         background: var(--bg);
+      }
+
+      .menu {
+ 	      background: var(--bg);
         position: fixed;
         font-family: sans-serif;
         padding: 10px 0 10px 0;
@@ -63,22 +67,22 @@ function genCSS (id: number, options: StyleOptions) {
         user-select: none;
       }
 
-      .button {
+      .menu .button {
         font-size: 12px;
         padding: 4px 15px 4px 15px;
         width: 250px;
       }
 
-      .button td {
+      .menu .button td {
         padding: 0;
       }
 
-      .button:nth-child(1) {
+      .menu .button .text {
         color: var(--text);
         text-align: left;
       }
 
-      .button:nth-child(2) {
+      .menu .button .cmd {
         color: var(--cmd);
         text-align: right;
       }
@@ -86,7 +90,7 @@ function genCSS (id: number, options: StyleOptions) {
       ${options.light.hover.background ||
         options.light.hover.background ?
         `
-        .button:hover {
+        .menu .button:hover {
           background: var(--bg-hover);
         }
         ` : ``
@@ -95,7 +99,7 @@ function genCSS (id: number, options: StyleOptions) {
       ${options.light.hover.text ||
         options.light.hover.text ?
         `
-        .button:hover:nth-child(1) {
+        .menu .button:hover .text {
           color: var(--text-hover);
         }
         ` : ``
@@ -104,7 +108,7 @@ function genCSS (id: number, options: StyleOptions) {
       ${options.light.hover.cmd ||
         options.light.hover.cmd ?
         `
-        .button:hover:nth-child(2) {
+        .menu .button:hover .cmd {
           color: var(--cmd-hover);
         }
         ` : ``
@@ -133,6 +137,7 @@ function genCSS (id: number, options: StyleOptions) {
         box-shadow: var(--shadow);
         border: 0;
         position: fixed;
+        border-radius: 10px;
       }
 
       .__context-menu_hidden__ {

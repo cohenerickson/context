@@ -15,7 +15,7 @@ class Context {
     this.id = Math.ceil(Math.random()*100000);
     this.buttons = [];
     // iframe
-    this.menu = u("<iframe>").attr("id", `__context-menu_${this.id}__`);
+    this.menu = u("<iframe>").attr("id", `__context-menu_${this.id}__`).addClass("__context-menu_hidden__");
     u("body").append(this.menu);
     // css
     let css = genCSS(this.id, options.style || {});
@@ -23,8 +23,15 @@ class Context {
     u(this.menu.first().contentDocument.head).append(this.style);
     u("head").append(u("<style>").html(css.external));
     // events
-    u("html").on("click", (target: Event) => this.close(target));
-    u("html").on("contextmenu", (target: Event) => this.open(target));
+    u("html").on("click", (target: MouseEvent) => {
+      target.preventDefault();
+      this.close(target);
+    });
+    u("html").on("contextmenu", (target: MouseEvent) => {
+      target.preventDefault();
+      this.close(target);
+      this.open(target);
+    });
   }
 
   addButton (button: Button) {
@@ -39,16 +46,34 @@ class Context {
     return this.buttons.find(x=>x.id===id);
   }
 
-  open (target: Event) {
+  open (target: MouseEvent) {
+    // add buttons
+    this.menu.removeClass("__context-menu_hidden__");
+    u(this.menu.first().contentDocument.body).append(u("<div>").addClass("menu"));
+    let btns = [];
     this.buttons.forEach((btn: Button) => {
       let criteria = btn.options.criteria(target);
       if (criteria) {
-        u(this.menu.first().contentDocument.body).append(btn.elm(target));
+        btns.push(btn);
+        u(this.menu.first().contentDocument.body).find(".menu").append(btn.elm(target, this));
       }
     });
+    if (!btns.length) return this.close(target);
+    // update position and size
+    let x = target.clientX;
+    let y = target.clientY;
+    let width = u(this.menu.first().contentDocument.body).find(".menu").first().offsetWidth;
+    let height = u(this.menu.first().contentDocument.body).find(".menu").first().offsetHeight;
+    if (x > window.innerWidth - width) x -= width;
+    if (y > window.innerHeight - height) y -= height;
+    this.menu.first().style.left = x + "px";
+    this.menu.first().style.top = y + "px";
+    this.menu.first().style.width = width + "px";
+    this.menu.first().style.height = height + "px";
   }
 
-  close (target: Event) {
+  close (target: MouseEvent) {
+    this.menu.addClass("__context-menu_hidden__");
     u(this.menu.first().contentDocument.body).html("");
   }
 }
